@@ -6,5 +6,7 @@ import (
 )
 
 func TestSimple(t *testing.T) {
-    assert.Equal(t, 1, 1) // Simple equality check
+    t.Run("Addition of two numbers", func(t *testing.T) {
+        assert.Equal(t, 4, 2+2)
+    })
 }
