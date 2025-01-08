@@ -1,25 +1,11 @@
 package mock
 
 import (
-	"github.com/stretchr/testify/mock"
+	"github.com/sirupsen/logrus"
+	"github.com/Abiji-2020/NexOrb/logger"
 )
 
-type MockLogger struct {
-	mock.Mock
+func MockLog() *logger.Logger {
+	mockLog := logrus.New()
+	return &logger.Logger{Instance: mockLog}
 }
-
-func (m *MockLogger) LogError(msg string) {
-	m.Called(msg)
-}
-
-func (m *MockLogger) LogInfo(msg string) {
-	m.Called(msg)
-}
-
-func (m *MockLogger) LogDebug(msg string) {
-	m.Called(msg)
-}
-
-func (m *MockLogger) LogWarn(msg string) {
-	m.Called(msg)
-}	

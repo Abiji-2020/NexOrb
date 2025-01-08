@@ -2,16 +2,17 @@ package mock
 
 import(
 	"gorm.io/gorm"
-	"gorm.io/driver/sqlite"
+	"github.com/glebarez/sqlite"
 	"github.com/Abiji-2020/NexOrb/pkg/models"
+	"github.com/Abiji-2020/NexOrb/database"
 )
 
-func InitTestDB() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open("file::memory:?cache=shared"), &gorm.Config{})
+func InitTestDB() *database.Database {
+	db, err := gorm.Open(sqlite.Open(":memory:?_pragma=foreign_keys(1)"), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect to database")
 	}
-	return db
+	return &database.Database{Instance: db}
 }
 
 func MigrateTestDB(db *gorm.DB){

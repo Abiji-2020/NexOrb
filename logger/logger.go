@@ -5,7 +5,7 @@ import (
 )
 
 type Logger struct {
-	instance *logrus.Logger
+	Instance *logrus.Logger
 }
 
 func InitLogger() *Logger {
@@ -15,25 +15,25 @@ func InitLogger() *Logger {
 		TimestampFormat: "2006-01-02 15:04:05",
 	})
 	log.SetLevel(logrus.InfoLevel)
-	return &Logger{instance: log}
+	return &Logger{Instance: log}
 }
 
 func (l *Logger) LogInfo(msg string) {
-	l.instance.Info(msg)
+	l.Instance.Info(msg)
 }
 
 func (l *Logger) LogError(msg string) {
-	l.instance.Error(msg)
+	l.Instance.Error(msg)
 }
 
 func (l *Logger) LogFatal(msg string) {
-	l.instance.Fatal(msg)
+	l.Instance.Fatal(msg)
 }
 
 func (l *Logger) LogWarn(msg string) {
-	l.instance.Warn(msg)
+	l.Instance.Warn(msg)
 }
 
 func (l *Logger) LogDebug(msg string) {
-	l.instance.Debug(msg)
+	l.Instance.Debug(msg)
 }

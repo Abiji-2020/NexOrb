@@ -13,12 +13,16 @@ import (
 // @description This is the API documentation for NexOrb.
 // @host localhost:8080
 // @BasePath /v1/api
-
 func main() {
+	if err := StartServer(); err != nil {
+		fmt.Println("Failed to start server:", err)
+	}
+}
+
+func StartServer() error {
 	app := config.NewConfig()
 	if app == nil {
-		fmt.Println("Error initializing the app")
-		return
+		return fmt.Errorf("error initializing the app")
 	}
 	app.InitializeRoutes()
 	app.Logger.LogInfo("Routes initialized")
@@ -27,17 +31,20 @@ func main() {
 	err := app.MigrateDatabase()
 	if err != nil {
 		app.Logger.LogError(fmt.Sprintf("Error migrating the database: %v", err))
-		return
+		return err
 	}
 
 	// Set up Swagger route
 	app.Router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Start the Gin server
-	err = app.Router.Run(":" + app.ServerPort)
-	if err != nil {
-		app.Logger.LogFatal("Failed to start server: " + err.Error())
-	}
+	go func() {
+		err = app.Router.Run(":" + app.ServerPort)
+		if err != nil {
+			app.Logger.LogFatal("Failed to start server: " + err.Error())
+		}
+	}()
 
 	app.Logger.LogInfo("Server started on port " + app.ServerPort)
+	return nil
 }

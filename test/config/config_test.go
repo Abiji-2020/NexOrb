@@ -9,20 +9,20 @@ import (
 
 func TestNewConfig(t *testing.T) {
 	// Initialize the logger
-	mocklog := &mock.MockLogger{}
+	mocklog := mock.MockLog()
 
 	mockdb := mock.InitTestDB()
 
 	appConfig := &config.AppConfig{
 		Router: mock.TestRouter(),
-		DB: mockdb,
+		Database: mockdb,
 		Logger: mocklog,
 		ServerPort: "8080",
 	}
 
 	assert.NotNil(t, appConfig, "AppConfig should not be nil")
 	assert.NotNil(t, appConfig.Router,"Router should not be nil")
-	assert.NotNil(t, appConfig.DB,"DB should not be nil")
+	assert.NotNil(t, appConfig.Database,"DB should not be nil")
 	assert.NotNil(t, appConfig.Logger,"Logger should not be nil")
 	assert.Equal(t, "8080", appConfig.ServerPort, "ServerPort should be 8080")
 }
