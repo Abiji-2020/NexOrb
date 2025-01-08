@@ -20,9 +20,9 @@ func TestNewConfig(t *testing.T) {
 		ServerPort: "8080",
 	}
 
-	assert.NotNil(t, appConfig, "AppConfig should not be nil")
-	assert.NotNil(t, appConfig.Router,"Router should not be nil")
-	assert.NotNil(t, appConfig.Database,"DB should not be nil")
-	assert.NotNil(t, appConfig.Logger,"Logger should not be nil")
-	assert.Equal(t, "8080", appConfig.ServerPort, "ServerPort should be 8080")
+	assert.NotNil(t, appConfig, "NewConfig should return a valid AppConfig instance")
+	assert.NotNil(t, appConfig.Router, "AppConfig should initialize with a valid Router instance")
+	assert.NotNil(t, appConfig.Database, "AppConfig should initialize with a valid Database connection")
+	assert.NotNil(t, appConfig.Logger, "AppConfig should initialize with a valid Logger instance")
+	assert.Equal(t, "8080", appConfig.ServerPort, "AppConfig should be initialized with the specified server port '8080'")
 }
