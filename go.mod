@@ -1,5 +1,22 @@
 module github.com/Abiji-2020/NexOrb
 
+package testing
+
+import(
+	"testing"
+
+	"github.com/Abiji-2020/NexOrb" 
+)
+
+go 1.18  
+
+require (
+    
+    github.com/gin-gonic/gin v1.7.4 
+	github.com/stretchr/testify v1.7.0
+)
+
+
 go 1.23
 
 require (
@@ -56,4 +73,12 @@ require (
 	golang.org/x/tools v0.28.0 // indirect
 	google.golang.org/protobuf v1.36.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+)
+
+
+go 1.20
+
+require(
+        github.com/KyleBanks/depth v1.2.1 
+		github.com/bytedance/sonic v1.12.6
 )
